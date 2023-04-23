@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -10,6 +11,9 @@ export class InicioComponent implements OnInit {
   apellido = "Munoz"
 
   loadingVisible = false;
+  constructor(private ruta: Router) { }
+  ngOnInit(): void {
+  }
 
   visualizarLoading(){
   //codigo de loading
@@ -18,10 +22,7 @@ export class InicioComponent implements OnInit {
     this.loadingVisible = false;
     }, 2000);
   }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  irPaginaTabla(){
+    this.ruta.navigate(['tabla']);
+  }  
 }
