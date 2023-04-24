@@ -13,7 +13,9 @@ import { MessageService } from 'primeng/api';
 export class PaginaTablaComponent implements OnInit {
   listEmpleado: IDataEmpleado[] = [];
   columnTabla:any;
-  listMenu:MenuItem[]=[];
+  //listMenu:MenuItem[]=[];
+  loading = false;
+
   //activeItem!:MenuItem;
   constructor(private rutas: Router,
               private empleadoService:EmpleadoService,
@@ -33,15 +35,17 @@ export class PaginaTablaComponent implements OnInit {
     //     console.log(error);
     //   }
     // );
-
+    this.loading=true;
     this.empleadoService.getAllEmployee().subscribe({
       next:(datos) => {
         console.log(datos);
         this.listEmpleado = datos.data;
+        this.loading=false;
         this.mensajes.add({ severity: 'success', summary: 'Satisfactorio', detail: 'Exito' });
       }, 
       error:(err) => {
         console.log(err);
+        this.loading=false;
         this.mensajes.add({ severity: 'error', summary: 'Error', detail: 'Hubo un problema' });
 
       }
